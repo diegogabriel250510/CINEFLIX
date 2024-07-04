@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Series</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons a, .buttons button {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .buttons a:hover, .buttons button:hover {
+            background-color: #0056b3;
+        }
+        .buttons a {
+            text-align: center;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Series</h1>
+        <form action="{% url 'cadastro_series' %}", method="POST">{% csrf_token %}
+            
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="ondeAssistir">Onde Assistir:</label>
+            <input type="text" id="ondeAssistir" name="ondeAssistir" required>
+
+            <label for="categoria">Categoria:</label>
+            <select id="categoria" name="categoria" required>
+                <option value="drama">Drama</option>
+                <option value="comedia">Comédia</option>
+                <option value="romance">Romance</option>
+                <option value="documentario">Documentário</option>
+                <option value="ação">Ação</option>
+                <option value="aventura">Aventura</option>
+                <option value="ficção cientifica">Ficção Científica</option>
+                <option value="terror">Terror</option>
+            </select>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" rows="4" required></textarea>
+
+            <label for="temporadas">Temporadas:<label>
+            <input type="text" id="temporadas" name="temporadas" required>
+
+            <label for="episodios">Episodios:<label>
+            <input type="text" id="episodios" name="episodios" required>
+            
+            <div class="buttons">
+                <a href="{% url 'cadastro_filmes' %}">Cadastro de Filmes</a>
+                <button type="submit">Cadastrar Series</button>
+                <a href="{% url 'home_series' %}">Home</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
