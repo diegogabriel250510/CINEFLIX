@@ -20,9 +20,33 @@ def cadastro(request):
 def home(request):
     series = Serie.objects.all()
     return render(request, 'home_series.html', {'series':series})
+
 def remover(request, id):
     serie_remover = Serie.objects.filter(id=id)
     if len(serie_remover) == 1:
         serie_remover.delete()
     series = Serie.objects.all()
     return render(request, 'home_series.html', {'series':series})   
+
+def alterar(request, id):
+    if request.method == "GET":
+        series = Serie.objects.filter(id=id)
+        return render(request, 'alterar_series.html', {'series':series})
+    elif request.method == "POST":
+        nome = request.POST.get('nome')
+        onde_assistir = request.POST.get('onde_assistir')
+        categoria = request.POST.get('categoria')
+        descricao = request.POST.get('descricao')
+        temporadas = request.POST.get('temporadas')
+        episodios = request.POST.get('episodios')
+
+        serie_editada = Serie(nome=nome,
+                              onde_assistir=onde_assistir,
+                              categoria=categoria,
+                              descricao=descricao,
+                              temporadas=temporadas,
+                              episodios=episodios)
+        serie_editada.save()
+
+        series = Serie.objects.all()
+        return render(request, 'home_series.html', {'series':series})

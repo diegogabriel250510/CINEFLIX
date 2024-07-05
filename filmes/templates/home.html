@@ -68,10 +68,15 @@
             margin-top: 0;
         }
 
-        .remove-button {
+        .button-container {
+            display: flex;
+            gap: 10px;
             position: absolute;
             top: 10px;
             right: 10px;
+        }
+
+        .remove-button {
             background-color: #ff4c4c;
             color: white;
             border: none;
@@ -110,7 +115,10 @@
                         <p><strong>Descrição:</strong> {{ filme.descricao }}</p>
                         <p><strong>Gênero:</strong> {{ filme.categoria }}</p>
                         <p><strong>Onde Assistir:</strong> {{ filme.onde_assistir }}</p>
-                        <a href="{% url 'remover_filmes' filme.id %}"><button class="remove-button">Remover</a></button>
+                        <div class="button-container">
+                            <a href="{% url 'remover_filmes' filme.id %}"><button class="remove-button">Remover</button></a>
+                            <a href="{% url 'alterar_filmes' filme.id %}"><button class="remove-button">Alterar</button></a>
+                        </div>
                     </li>
                 {% empty %}
                     <li>Nenhuma indicação de filme disponível no momento.</li>
